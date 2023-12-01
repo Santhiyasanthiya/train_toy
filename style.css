@@ -1,0 +1,388 @@
+:root {
+    --purple: #888ECD;
+    --pink: #D68699;
+    --yellow: #F3FB85;
+    --yellow-dark: #E0E87A;
+    --green: #8BE3AD;
+  
+  }
+  
+  body{
+    background: #65f0f7;
+    position: relative;
+  }
+  
+  .box-canvas{
+    position: absolute;
+    display: flex;
+    top: 150px;
+    margin-bottom: 8%;
+    width: 630px;
+    height:200px;
+    background-image: linear-gradient(
+    transparent,
+    transparent 130px,
+    gray 130px,
+    gray 140px,
+    transparent 140px);
+    background-size: 550px 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-content: space-between;
+    animation: moveLeft 7s infinite linear;
+  }
+  
+  @keyframes moveLeft {
+    0% {
+    transform: translateX(100vw);
+    }
+    
+    100% {
+      transform: translateX(-630px);
+    }
+  }
+  
+  /* Slow down the animation when the train has to travel further */
+  @media only screen and (min-width: 600px) {
+    .box-canvas {
+      animation: moveLeft 10s infinite linear;
+    }
+  }
+  
+  @media only screen and (min-width: 900px) {
+    .box-canvas {
+      animation: moveLeft 13s infinite linear;
+    }
+  }
+  
+  
+  
+  .front-car {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .cabin {
+    position: absolute;
+    width: 100px;
+    height: 150px;
+    background: var(--purple);
+    right: 0;
+  }
+  
+  .cabin::before {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 10px;
+    background: var(--yellow);
+    left: -20px;
+  }
+  
+  .cabin::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(-45deg, aliceblue, 60%, #65BFF7);
+    left: 50%;
+    transform: translateX(-50%);
+    top: 30px;
+  }
+  
+  .front {
+    width: 100px;
+    height: 75px;
+    position: absolute;
+    background: var(--pink);
+    top: 75px;
+    border-radius: 40% 0 0 20% / 50%;
+  }
+  
+  /* Chimney */
+  .front::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    background: var(--yellow);
+    position: absolute;
+    top: -40px;
+    left: 25px;
+    clip-path: polygon(20% 100%, 80% 100%, 100% 0, 0 0);
+  }
+  
+  .smoke {
+    position: absolute;
+    left: 10px;
+    top: -20px;
+    width: 80px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    animation: smokeOne 1.5s infinite;
+  }
+  
+  .smoke::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: 0;
+    width: 50px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    animation: smokeTwo 1.5s infinite;
+  }
+  
+  .smoke::after {
+    content: '';
+    position: absolute;
+    top: -68px;
+    right: 0;
+    width: 35px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    animation: smokeThree 1.5s infinite;
+  }
+  
+  @keyframes smokeOne {
+    0% {
+      background: transparent;
+    }
+    10% {
+      background: rgba(255,255,255,0.6);
+    }
+  }
+  
+  @keyframes smokeTwo {
+    0% {
+      background: transparent;
+    }
+    40% {
+      background: rgba(255,255,255,0.4);
+    }
+  }
+  
+  @keyframes smokeThree {
+    0% {
+      background: transparent;
+    }
+    80% {
+      background: rgba(255,255,255,0.3);
+    }
+  }
+  
+  
+  .wheels {
+    position: absolute;
+    width: 160px;
+    bottom: 10px;
+    height: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .wheel {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    background: var(--pink);
+    border: 22px solid var(--green);
+    border-radius: 50%;
+    border-right-color: var(--yellow);
+    border-left-color: var(--yellow);
+    animation: spin 0.7s infinite linear;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: none;
+    }
+    
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+  
+  .trailer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+  
+  .skip {
+    position: absolute;
+    width: 200px;
+    height: 10px;
+    background: var(--yellow);
+    top: 70px;
+  }
+  
+  .two .skip::before {
+    background: var(--pink);
+  }
+  
+  .skip::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 200px;
+    height: 70px;
+    background: var(--purple);
+    clip-path: polygon(20% 100%, 80% 100%, 100% 0, 0 0);
+  }
+  
+
+
+  .bird{
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells-new.svg');
+    filter: invert(34%) sepia(55%) saturate(427%) hue-rotate(141deg) brightness(93%) contrast(91%);
+    background-size: auto 100%;
+    width: 88px;
+    height: 125px;
+    will-change: background-position;
+
+    animation-name: fly-cycle;
+    animation-timing-function: steps(10);
+    animation-iteration-count: infinite;
+}
+
+.bird-one{
+    animation-duration: 1s;
+    animation-delay: -0.5s;
+
+}
+.bird-two{
+    animation-duration: 0.9;
+    animation-delay: -0.75.s;
+
+}
+.bird-three{
+    animation-duration:1.25s;
+    animation-delay: -0.25s
+
+}
+.bird-four{
+    animation-duration: 1.1s;
+    animation-delay: -0.5s;
+}
+
+.bird-container {
+	position: absolute;
+	top: 10%;
+  left: -3%;
+	transform: scale(0) translateX(-10vw);
+	will-change: transform;
+	
+	animation-name: fly-right-one;
+	animation-timing-function: linear;
+	animation-iteration-count: infinite;
+}
+	
+.bird-container-one{
+	animation-duration: 15s;
+	animation-delay: 0;
+}
+	
+.bird-container-two{
+	animation-duration: 16s;
+	animation-delay: 1s;
+}
+	
+.bird-container-three{
+	animation-duration: 14.6s;
+	animation-delay: 9.5s;
+}
+	
+.bird-container-four {
+		animation-duration: 16s;
+		animation-delay: 10.25s;
+}
+/* @keyframes fly-cycle {
+    100%{
+        background-position: -3600px 0;
+    }
+} */
+@keyframes fly-cycle {
+	
+	100% {
+		background-position: -900px 0;
+	}
+	
+}
+
+@keyframes fly-right-one {
+	
+	0% {
+		transform: scale(0.3) translateX(-10vw);
+	}
+	
+	10% {
+		transform: translateY(2vh) translateX(10vw) scale(0.4);
+	}
+	
+	20% {
+		transform: translateY(0vh) translateX(30vw) scale(0.5);
+	}
+	
+	30% {
+		transform: translateY(4vh) translateX(50vw) scale(0.6);
+	}
+	
+	40% {
+		transform: translateY(2vh) translateX(70vw) scale(0.6);
+	}
+	
+	50% {
+		transform: translateY(0vh) translateX(90vw) scale(0.6);
+	}
+	
+	60% {
+		transform: translateY(0vh) translateX(110vw) scale(0.6);
+	}
+	
+	100% {
+		transform: translateY(0vh) translateX(110vw) scale(0.6);
+	}
+	
+}
+
+@keyframes fly-right-two {
+	
+	0% {
+		transform: translateY(-2vh) translateX(-10vw) scale(0.5);
+	}
+	
+	10% {
+		transform: translateY(0vh) translateX(10vw) scale(0.4);
+	}
+	
+	20% {
+		transform: translateY(-4vh) translateX(30vw) scale(0.6);
+	}
+	
+	30% {
+		transform: translateY(1vh) translateX(50vw) scale(0.45);
+	}
+	
+	40% {
+		transform: translateY(-2.5vh) translateX(70vw) scale(0.5);
+	}
+	
+	50% {
+		transform: translateY(0vh) translateX(90vw) scale(0.45);
+	}
+	
+	51% {
+		transform: translateY(0vh) translateX(110vw) scale(0.45);
+	}
+	
+	100% {
+		transform: translateY(0vh) translateX(110vw) scale(0.45);
+	}
+	
+}
